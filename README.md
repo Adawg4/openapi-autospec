@@ -19,7 +19,7 @@ Need last-minute docs? Quickly capture API behavior with a server proxy that aut
 OpenAPI AutoSpec is a local server proxy that generates new OpenAPI specifications from network requests. When running, it will connect your local HTTP traffic to the proxy. Once that happens, it will automatically convert network traffic into the specification.
 
 *Features*:
-- Generate OpenAPI 3.1 specifications automatically for any local website or application
+- Generate OpenAPI 3.0 specifications automatically for any local website or application
 - Capture and document new requests & responses, including headers, bodies, and query parameters
 - Review generated specifications in real-time on your terminal and download them with ease
 - Export your OpenAPI file for sharing
@@ -67,7 +67,7 @@ Want an easy way to automatically build and manage your SDKs, Zapier/Make integr
 
 As for the repo:
 - [Path parameterization](https://www.abstractapi.com/api-glossary/path-parameters) tools
-- HTTPS support
+- HTTPS and OpenAPI 3.1 Specification support
 - Run on GCP, AWS, Azure, Docker, and Kubernetes
 </br>
 
