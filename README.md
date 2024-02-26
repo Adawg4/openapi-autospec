@@ -23,6 +23,7 @@ OpenAPI AutoSpec is a local server proxy that generates new OpenAPI specificatio
 - Capture and document new requests & responses, including headers, bodies, and query parameters
 - Review generated specifications in real-time on your terminal and download them with ease
 - Export your OpenAPI file for sharing
+- Ignores static file URLs: .js, .css, .svg, .png, .jpeg, .ico.
 </br>
 
 ## Installation
@@ -42,54 +43,24 @@ $ npm install openapi-autospec
 </br>
 
 ## Usage
-Use the link generated from the proxy server to catch traffic on a target server. To generate the document you want: visit pages, fill out forms/all the fields or data you wish to track, and perform the actions you want to document from your APIs.
+Start the server, it generates a link for you to use, and then use the new link from the proxy server to catch traffic on a target server. To generate the document you want: visit pages, fill out forms/all the fields or data you wish to track, and perform the actions you want to document from your APIs. For more information on getting documentation from a full-stack server versus both frontend and backend servers - <a href="#readme-misc">use this reference</a>.
 
 To start the server:
 ```console
-$ node proxy.js
-```
-### Full-Stack Web Frameworks (e.g., Django)
-
-1. Run your website and note down the port and localhost information. Ex. 127.0.0.1:8000
-2. Run the script and specify the localhost information where traffic should be routed. Ex. node proxy.js --proxyto=127.0.0.1:8000. 
-```
-$ node proxy.js --proxyto=YOUR_LOCALHOST --proxyfrom=PORT
-```
-- The --proxyto flag should be followed by the localhost information where you want the traffic to be routed. Ex. "127.0.0.1:8000"
-- The optional --proxyfrom flag can be used to specify a different port to run the proxy, in case the default port is already in use. The value following this would be the port you want to use for the proxy. Ex. "3000" 
-4. Copy the output URL (Ex. localhost:7928) and use your website or application as described above.
-5. Access the newly created file - named with the current timestamp.
-
-### Frontend and Backend Separately (e.g., a Node backend and React frontend)
-
-For applications with a separate frontend and backend, run proxies for both.
-
-1. Run your frontend and note down the host and port information. E.g., 127.0.0.1:3000
-
-2. Operate your backend on a different port and note the host and port information. E.g., 127.0.0.1:5000 (For detailed guidelines on how to change port info, visit [here]()
-
-3. Run the proxy for the frontend, specifying the frontend's host and port information where traffic should be routed. If necessary, you can specify a different port for the proxy to operate from.
-
-```console
-$ node proxy.js --proxyto=YOUR_FRONTEND_HOST --proxyfrom=FRONTEND_PROXY_PORT
+$ npx autospec --portTo PORT --portFrom PORT --filePath openapi.json
 ```
 
-4. Similarly, run the proxy for the backend, specifying the backend's host and port. 
-
-```console
-$ node proxy.js --proxyto=YOUR_BACKEND_HOST --proxyfrom=BACKEND_PROXY_PORT
-```
-
-This will initiate the server that listens to network requests from your locally running websites, automatically documenting their API interactions.
-
-
+- --portTo choose the port your localhost webserver is running from.
+- --portFrom (optional) is for if another port is in use.
+- --filePath is where you would like to export the spec.
 
 </br>
-Once the server is running, it will automatically begin documenting the API behavior of your local web applications. The documentation process is based on the network requests observed, so you don't need to do any crazy setup within your applications beyond what is below.
+Once the server is running, it will automatically begin documenting the API behavior of your local web applications. The documentation process is based on the network requests observed, so you don't need to do any crazy setup within your applications beyond the below.
+
 
 The server provides real-time printouts of the generated OpenAPI specifications. From here:
 - Fill out all fields you wish to be documented for forms
-- Export the OpenAPI specification for external use or sharing
+- Export the OpenAPI specification for external use or sharing (exports where you are in the terminal if you don't specify the --filePath flag)
 - You should find and replace all instances of ‘localhost’ or ‘127.0.0.1:8000’ in the exported doc with your actual website
 - Filter hosts and parameterize paths to fine-tune the documentation properly for server stubs
 - Restart the documentation process at any time to refresh the generated specifications
@@ -123,8 +94,45 @@ We welcome community contributions. For guidelines, refer to our [CONTRIBUTING.m
 
 
 Shoutouts to [Awesome API DevTools](https://github.com/yosriady/awesome-api-devtools) and [OpenAPI Devtools](https://chromewebstore.google.com/detail/openapi-devtools/jelghndoknklgabjgaeppjhommkkmdii).
+</br>
 
 
+<a name="readme-misc"></a>
+## Running proxies for multiple servers
+
+### Full-Stack Web Frameworks (e.g., Django)
+
+1. Run your website and note down the port and localhost information. Ex. 127.0.0.1:8000
+2. Run the script and specify the localhost information where traffic should be routed. Ex. npx autospec --portTo 8000. 
+```
+$ npx autospec --portTo PORT --portFrom PORT--filePath openapi.json
+```
+- The --portTo flag should be followed by the localhost information where you want the traffic to be routed. Ex. "127.0.0.1:8000"
+- The optional --portFrom flag can be used to specify a different port to run the proxy, in case the default port is already in use. The value following this would be the port you want to use for the proxy. Ex. "3000" 
+3. Copy the output URL (Ex. localhost:7928) and use your website or application as described above.
+4. Access the newly created file - named with the current timestamp.
+
+### Frontend and Backend Separately (e.g., a Node backend and React frontend)
+
+For applications with a separate frontend and backend, run proxies for both.
+
+1. Run your frontend and note down the host and port information. E.g., 127.0.0.1:3000
+
+2. Operate your backend on a different port and note the host and port information. E.g., 127.0.0.1:5000 (For detailed guidelines on how to change port info, visit <a href="#readme-bottom">here</a>).
+
+3. Run the proxy for the frontend, specifying the frontend's host and port information where traffic should be routed. If necessary, you can specify a different port for the proxy to operate from.
+
+```console
+$ npx autospec --portTo FRONTEND_PORT --filePath frontend.json
+```
+
+4. Similarly, run the proxy for the backend, specifying the backend's host and port where the frontend normally sends information.
+
+```console
+$ npx autospec --portTo NEW_BACKEND_PORT --portFrom NORMAL_BACKEND_PORT --filePath backend.json
+```
+
+This will initiate the server that listens to network requests from your locally running websites, automatically documenting their API interactions.
 
 ## Changing backend ports
 
@@ -218,8 +226,5 @@ For an Angular application, you can specify the port with the --port option when
 ng serve --port 4201
 ```
 
-These examples cover how to change the port for the most popular web frameworks. It's important to note that the exact commands might vary slightly based on the version of the framework or additional configurations in your project. Always refer to the official documentation for the most accurate and up-to-date information.
+These are references - Always refer to the official documentation for the most accurate and up-to-date information.
 ```
-
-
-
