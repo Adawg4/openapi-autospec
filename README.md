@@ -15,7 +15,6 @@ Need last-minute docs? Quickly capture API behavior with a server proxy that aut
 <p align="center" width="100%">
     <img width="80%" src="resources/demo.gif">
 </p>
-
 OpenAPI AutoSpec is a local server proxy that generates new OpenAPI specifications from network requests. When running, it will connect your local HTTP traffic to the proxy. Once that happens, it will automatically convert network traffic into the specification.
 
 *Features*:
