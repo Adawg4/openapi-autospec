@@ -9,5 +9,5 @@ program
   .parse(process.argv);
 
 const options = program.opts();
-startServer(options.portTo, options.portFrom, options.filePath);
+startServer(options.portFrom, options.portTo, options.filePath);
 

@@ -13,12 +13,13 @@ const ignoreWords = [
   "jpg",
   "jpeg",
   "webp",
-  "json"
+  "json",
+  "ico"
 ]
 
 
 const startServer = (destPort, targetPort, outputFile) => {
-  const PORT = destPort || 8687; // Port for the proxy server
+  const PORT = destPort || 8687; 
   const TARGET_HOST = "127.0.0.1";
   const TARGET_PORT = targetPort || 3002;
   const OUTPUT_FILE = outputFile || "openapi.json";
@@ -39,13 +40,14 @@ const startServer = (destPort, targetPort, outputFile) => {
             return;
           }
         }
+        console.log(`[${req.method}] received for ${fullUrl}`);
         harFile.recordRequest(req, requestBody, fullUrl);
     });
     // Proxy the request
     proxy.web(req, res, { target: `http://${TARGET_HOST}:${TARGET_PORT}` });
   });
 
-  // To handle HTTPS, listen for the CONNECT method and then proxy the HTTPS requests.
+  
   server.on("connect", (req, cltSocket, head) => {
     // Connect to the target host and port
     const srvUrl = url.parse(`http://${req.url}`);
@@ -71,7 +73,6 @@ const startServer = (destPort, targetPort, outputFile) => {
     );
   });
 
-  // Proxy event listeners for logging response details
   proxy.on("proxyRes", (proxyRes, req, res) => {
     const fullUrl = `${req.protocol ? req.protocol : "http"}://${req.headers.host}${req.url}`;
     let responseData = "";
