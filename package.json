@@ -1,6 +1,6 @@
 {
   "name": "openapi-autospec",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Automatically generate an OpenAPI spec through your app's dev environment.",
   "main": "index.js",
   "scripts": {
