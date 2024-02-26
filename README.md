@@ -39,19 +39,53 @@ Installation steps:
 ```console
 $ npm install openapi-autospec
 ```
+</br>
+
+## Usage
+Use the link generated from the proxy server to catch traffic on a target server. To generate the document you want: visit pages, fill out forms/all the fields or data you wish to track, and perform the actions you want to document from your APIs.
+
 To start the server:
 ```console
 $ node proxy.js
+```
+### Full-Stack Web Frameworks (e.g., Django)
 
+1. Run your website and note down the port and localhost information. Ex. 127.0.0.1:8000
+2. Run the script and specify the localhost information where traffic should be routed. Ex. node proxy.js --proxyto=127.0.0.1:8000. 
+```
+$ node proxy.js --proxyto=YOUR_LOCALHOST --proxyfrom=PORT
+```
+- The --proxyto flag should be followed by the localhost information where you want the traffic to be routed. Ex. "127.0.0.1:8000"
+- The optional --proxyfrom flag can be used to specify a different port to run the proxy, in case the default port is already in use. The value following this would be the port you want to use for the proxy. Ex. "3000" 
+4. Copy the output URL (Ex. localhost:7928) and use your website or application as described above.
+5. Access the newly created file - named with the current timestamp.
+
+### Frontend and Backend Separately (e.g., a Node backend and React frontend)
+
+For applications with a separate frontend and backend, run proxies for both.
+
+1. Run your frontend and note down the host and port information. E.g., 127.0.0.1:3000
+
+2. Operate your backend on a different port and note the host and port information. E.g., 127.0.0.1:5000 (For detailed guidelines on how to change port info, visit [here]()
+
+3. Run the proxy for the frontend, specifying the frontend's host and port information where traffic should be routed. If necessary, you can specify a different port for the proxy to operate from.
+
+```console
+$ node proxy.js --proxyto=YOUR_FRONTEND_HOST --proxyfrom=FRONTEND_PROXY_PORT
+```
+
+4. Similarly, run the proxy for the backend, specifying the backend's host and port. 
+
+```console
+$ node proxy.js --proxyto=YOUR_BACKEND_HOST --proxyfrom=BACKEND_PROXY_PORT
 ```
 
 This will initiate the server that listens to network requests from your locally running websites, automatically documenting their API interactions.
-</br></br>
 
 
-## Usage
 
-Once the server is running, it will automatically begin documenting the API behavior of your local web applications. The documentation process is based on the network requests observed, so you don't need to do any additional setup within your applications.
+</br>
+Once the server is running, it will automatically begin documenting the API behavior of your local web applications. The documentation process is based on the network requests observed, so you don't need to do any crazy setup within your applications beyond what is below.
 
 The server provides real-time printouts of the generated OpenAPI specifications. From here:
 - Fill out all fields you wish to be documented for forms
@@ -63,7 +97,7 @@ The server provides real-time printouts of the generated OpenAPI specifications.
 
 ## Roadmap
 
-Want an easy way to automatically build and manage your SDKs, Zapier/Make integrations, Docs, Webhooks, RPA plugins, and custom plugins to marketplaces like Salesforce, Zoom, GSuite all in one spot while getting your app AI-agent ready? [Contact us](https://calendly.com/aidan_/demo). We can custom tailor this and more.
+Want an easy way to automatically build and manage your SDKs, Zapier/Make integrations, Docs, Webhooks, RPA plugins, and custom plugins to marketplaces like Salesforce, Zoom, GSuite all in one spot while getting your app AI-agent ready? [Contact us](https://calendly.com/aidan_/demo). We can custom tailor this and more with our paid service.
 
 As for the repo:
 - [Path parameterization](https://www.abstractapi.com/api-glossary/path-parameters) tools
@@ -89,3 +123,103 @@ We welcome community contributions. For guidelines, refer to our [CONTRIBUTING.m
 
 
 Shoutouts to [Awesome API DevTools](https://github.com/yosriady/awesome-api-devtools) and [OpenAPI Devtools](https://chromewebstore.google.com/detail/openapi-devtools/jelghndoknklgabjgaeppjhommkkmdii).
+
+
+
+## Changing backend ports
+
+<a name="readme-bottom"></a>
+```markdown
+### 1. Express.js (Node.js)
+To change the port for an Express.js application, you can set the port in your application code before starting the server. For example:
+
+```javascript
+const express = require('express');
+const app = express();
+const port = 3001; // Change to your desired port
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
+```
+
+### 2. Django (Python)
+For Django, you can specify the port when you run the runserver command from the command line:
+
+```shell
+python manage.py runserver 8080
+```
+This command runs the server on port 8080.
+
+### 3. Flask (Python)
+In Flask, you can specify the port when calling the app.run() method:
+
+```python
+from flask import Flask
+app = Flask(__name__)
+
+if __name__ == '__main__':
+    app.run(port=5001) // Change to your desired port
+```
+
+### 4. Rails (Ruby)
+For a Rails application, you can specify the port with the -p option when starting the server:
+
+```shell
+rails server -p 4000
+```
+This command runs the server on port 4000.
+
+### 5. Spring Boot (Java)
+In Spring Boot, you can specify the server port in the application.properties or application.yml file located in the src/main/resources directory:
+
+```
+server.port=8081
+```
+
+### 6. ASP.NET Core (C#)
+For an ASP.NET Core application, you can specify the port in the launchSettings.json file found in the Properties folder of your project. Alternatively, you can use the --urls command-line argument:
+
+```shell
+dotnet run --urls="http://localhost:5002"
+```
+This command runs the server on port 5002.
+
+### 7. Laravel (PHP)
+In Laravel, you can specify the port with the --port option when serving the application:
+
+```shell
+php artisan serve --port=8001
+```
+This command runs the server on port 8001.
+
+### 8. Vue.js (Node.js)
+For a Vue.js project created with vue-cli, you can specify the port in the vue.config.js file:
+
+```javascript
+module.exports = {
+  devServer: {
+    port: 8081
+  }
+}
+```
+
+### 9. React (Node.js)
+For a React application created with create-react-app, you can set the port by modifying the start script in your package.json file, or by setting the PORT environment variable before running the npm start command:
+
+```shell
+PORT=3001 npm start
+```
+
+### 10. Angular (Node.js)
+For an Angular application, you can specify the port with the --port option when serving the application:
+
+```shell
+ng serve --port 4201
+```
+
+These examples cover how to change the port for the most popular web frameworks. It's important to note that the exact commands might vary slightly based on the version of the framework or additional configurations in your project. Always refer to the official documentation for the most accurate and up-to-date information.
+```
+
+
+
