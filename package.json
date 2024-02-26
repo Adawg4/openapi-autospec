@@ -1,0 +1,32 @@
+{
+  "name": "openapi-autospec",
+  "version": "1.0.0",
+  "description": "Automatically generate an OpenAPI spec through your app's dev environment.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js --portTo 3000 --portFrom 3001 --filePath test.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adawg4/openapi-autospec.git"
+  },
+  "keywords": [
+    "openapi",
+    "spec",
+    "generator",
+    "development",
+    "api",
+    "documentation"
+  ],
+  "author": "Aidan Pratt and Joel Jaison",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adawg4/openapi-autospec/issues"
+  },
+  "homepage": "https://github.com/Adawg4/openapi-autospec#readme",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "har-to-openapi": "^2.0.0",
+    "http-proxy": "^1.18.1"
+  }
+}
