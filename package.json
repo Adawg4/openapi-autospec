@@ -1,6 +1,6 @@
 {
   "name": "openapi-autospec",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automatically generate an OpenAPI spec through your app's dev environment.",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Adawg4/openapi-autospec.git"
+  },
+  "bin": {
+    "openapi-autospec": "./index.js"
   },
   "keywords": [
     "openapi",
