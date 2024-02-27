@@ -1,0 +1,127 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Shopping Website Example Spec",
+      "version": "1.0.0",
+      "description": " we show a GET commands expected behavior for getProducts"
+    },
+    "paths": {
+      "/products": {
+        "get": {
+          "description": "",
+          "operationId": "getProducts",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "example": [
+                    {
+                      "id": 1,
+                      "name": "Product 1",
+                      "price": 10.99
+                    },
+                    {
+                      "id": 2,
+                      "name": "Product 2",
+                      "price": 19.99
+                    }
+                  ],
+                  "schema": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [],
+                      "title": "ProductsGetRequestElement",
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "summary": "Get Products"
+        },
+        "parameters": [],
+        "post": {
+          "description": "",
+          "operationId": "postProducts",
+          "parameters": [],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "name": "New Product",
+                  "price": 25.99
+                },
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [],
+                  "title": "ProductsPostRequest",
+                  "type": "object"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "content": {
+                "application/json": {
+                  "example": {
+                    "id": 3,
+                    "name": "New Product",
+                    "price": 25.99
+                  },
+                  "schema": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "price": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [],
+                    "title": "ProductsPostRequest",
+                    "type": "object"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "summary": "Post Products"
+        }
+      }
+    },
+    "servers": [
+      {
+        "url": "http://null"
+      }
+    ]
+  }

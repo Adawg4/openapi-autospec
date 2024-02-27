@@ -1,0 +1,135 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Address Storage Example Spec",
+      "version": "1.0.0",
+      "description": "We show a GET and POST for an endpoint to see and retrieve addresses"
+    },
+    "paths": {
+      "/endpoint": {
+        "get": {
+          "description": "",
+          "operationId": "getEndpoint",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "example": {
+                    "message": "This is a GET request response"
+                  },
+                  "schema": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [],
+                    "title": "EndpointGetRequest",
+                    "type": "object"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "summary": "Get Endpoint"
+        },
+        "parameters": [],
+        "post": {
+          "description": "",
+          "operationId": "postEndpoint",
+          "parameters": [],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "address": "123 Main St, City, Country",
+                  "age": 30,
+                  "email": "john.doe@example.com",
+                  "name": "John Doe"
+                },
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "address": {
+                      "type": "string"
+                    },
+                    "age": {
+                      "type": "integer"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [],
+                  "title": "EndpointPostRequest",
+                  "type": "object"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "example": {
+                    "data": {
+                      "address": "123 Main St, City, Country",
+                      "age": 30,
+                      "email": "john.doe@example.com",
+                      "name": "John Doe"
+                    },
+                    "message": "Received data"
+                  },
+                  "schema": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "address": {
+                            "type": "string"
+                          },
+                          "age": {
+                            "type": "integer"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [],
+                        "title": "Data",
+                        "type": "object"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [],
+                    "title": "EndpointPostRequest",
+                    "type": "object"
+                  }
+                }
+              },
+              "description": ""
+            }
+          },
+          "summary": "Post Endpoint"
+        }
+      }
+    },
+    "servers": [
+      {
+        "url": "http://null"
+      }
+    ]
+  }
