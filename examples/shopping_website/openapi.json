@@ -3,7 +3,7 @@
     "info": {
       "title": "Shopping Website Example Spec",
       "version": "1.0.0",
-      "description": " we show a GET commands expected behavior for getProducts"
+      "description": "We show a GET commands expected behavior for getProducts"
     },
     "paths": {
       "/products": {
