@@ -37,7 +37,6 @@ async function configureProxy(ip, port) {
         } else {
             throw new Error('Unsupported operating system');
         }
-        
         console.log('Proxy settings configured.');
     } catch (error) {
         console.error('Error configuring proxy settings:', error);
