@@ -7,7 +7,7 @@ class HARFile {
     constructor(file_path) {
         this.version = "1.2";
         this.creator = {
-            name: "Allybind",
+            name: "Portway.ai",
             version: "1.0"
         };
         this.entries = [];
